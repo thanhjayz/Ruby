@@ -1,0 +1,46 @@
+class Student
+    def initialize id, name, age
+        @id = id
+        @name = name
+        @age = age
+    end
+    def show
+        puts "Student: "
+        puts(@id, @name, @age)
+      end
+end
+Student.new(1, "Sara", 22).show
+Student.new(2, "Raju", 21).show
+
+class Grade
+    def initialize grade1, grade2, grade3
+        @grade1 = grade1
+        @grade2 = grade2
+        @grade3 = grade3
+    end
+    def show
+        puts "show : "
+        puts    ((@grade1+" "+@grade2+" "+@grade3)/3)
+    end
+    def avg
+        puts "avg : "
+        puts    ((@grade1+@grade2+@grade3)/3)
+    end
+end
+Grade.new(1, 2, 3).avg
+
+
+# Lớp động zật
+class Animal
+    @@type
+    @@name
+end
+# Lớp chim kế thừa động vật 
+class Bird < School
+    @@width
+    @@height
+    @@weight
+    @@wingLenght
+end
+    puts Animal.class_eval("@@type")
+    puts Bird.class_eval("@@")
