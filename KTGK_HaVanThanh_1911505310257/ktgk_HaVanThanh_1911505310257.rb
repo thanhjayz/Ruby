@@ -26,7 +26,7 @@ class PhuongTien
 end
 class Oto < PhuongTien
     attr_accessor :soChoNgoi, :kieuDongCo, :nhienLieu, :soTuiKhi, :ngayDangKiem
-    def initialize(soChoNgoi, kieuDongCo)
+    def initialize(soChoNgoi, kieuDongCo, nhienLieu, ngayDangKiem)
         super(id, hangSX, namSX, dongXe, giaBan, bienSo, mauXe)
         @soChoNgoi = soChoNgoi
         @kieuDongCo = kieuDongCo
@@ -51,7 +51,8 @@ class Oto < PhuongTien
 
     def to_s
         puts "id: #{@id}, hangSX: #{@hangSX}, dong xe: #{@dongXe}, gia ban: #{@giaBan}, bien so: #{@bienSo}, mau xe: #{@mauXe}"
-        puts "so cho ngoi: #{@soChoNgoi}, kieu dong co: #{@kieuDongCo}, nhien lieu: #{@nhienLieu}, so tui khi: #{@soTuiKhi}, ngay dang kiem: #{@nay dang kiem}"
+        puts "so cho ngoi: #{@soChoNgoi}, kieu dong co: #{@kieuDongCo}, nhien lieu: #{@nhienLieu}, so tui khi: #{@soTuiKhi}
+        , ngay dang kiem: #{@ngayDangKiem}"
     end
 end
 class XeMay < PhuongTien
@@ -95,32 +96,82 @@ class XeTai < PhuongTien
 end
 
 class QuanLyPhuongTien
+    attr_accessor :listPhuongTien
+    listPhuongTien = Array.new
+    def ThemPhuongTien
+        puts "nhap o to:"
+        oto257  = Oto.new
+        oto257.InPut
+        puts "nhap xe may:"
+        xeMay257 = XeMay.new
+        xeMay257.InPut
+        puts "nhap xe tai:"
+        xeTai257 = XeTai.new
+        xeTai257.InPut
 
+        @listPhuongTien  << oto257
+        @listPhuongTien  << xeMay257
+        @listPhuongTien  << xeTai257
+    end
+        
+    def XoaPhuongTien(id)
+        @listPhuongTien.each { |i| danhsach.delete(i.id.equal?id)}   
+    end
+
+    def TimKiemTheoHangSX
+        puts "tim kiem theo hang SX"
+        puts "nhap hang SX: "
+        hangSX = gets.chomp
+        @listPhuongTien.each {
+            |phuongTien, index|
+            if phuongTien.hangSX == hangSX
+                puts "phuong tien: "
+                puts phuongTien.to_s
+            end
+        }
+    end
+    
+    def TimKiemTheoMau
+        puts "tim kiem theo mau"
+        puts "nhap hang mau: "
+        mau = gets.chomp
+        @listPhuongTien.each {
+            |phuongTien, index|
+            if phuongTien.mau == mau
+                puts "phuong tien: "
+                puts phuongTien.to_s
+            end
+        }
+    end
+
+    def TimKiemTheoBienSo
+        puts "tim kiem theo bien so"
+        puts "nhap hang bien so: "
+        bienSo = gets.chomp
+        @listPhuongTien.each {
+            |phuongTien, index|
+            if phuongTien.bienSo == bienSo
+                puts "phuong tien  #{index}: "
+                puts phuongTien.to_s
+            end
+        }
+    end
+
+    def XuatDanhSachPhuongTien
+        @listPhuongTien.each {
+            |phuongTien, index|
+            puts "phuong tien  #{index}: "
+            puts phuongTien.to_s
+        }
+    
+    end
 
 end
+quanLyPhuongTien = QuanLyPhuongTien.new
+quanLyPhuongTien.ThemPhuongTien
 
-
-
-
-
-# congNhan_257 = CongNhan.new("Van Thanh 1 257", 21, "Nam", "Da Nang", 1)
-# kySu_257 = KySu.new("Van Thanh 2 257", 21, "Nam", "Hue", "cong nghe thong tin")
-# nhanVien_257 = NhanVien.new("Van Thanh 3 257", 21, "Nam", "Quang Nam", "Lap trinh vien")
-
-# listNhanVien = Array.new
-# listNhanVien << congNhan_257
-# listNhanVien << kySu_257
-# listNhanVien << nhanVien_257
-# listNhanVien << CongNhan.new("Van Thanh 4 257", 21, "Nam", "Da Nang", 1)
-# puts "nhap ten can bo can tim: "
-# ten = gets.chomp
-
-# listNhanVien.each {
-#     |nhanVien|
-#     if nhanVien.ten == ten
-#         puts "nhan vien can tim: "
-#         puts nhanVien.to_s
-#     end
-# }
-# puts "danh sach list can bo: "
-# puts listNhanVien
+quanLyPhuongTien.TimKiemTheoHangSX
+# quanLyPhuongTien.TimKiemTheoBienSo
+# quanLyPhuongTien.TimKiemTheoMau
+puts"danh sach phuong tien:"
+quanLyPhuongTien.XuatDanhSachPhuongTien
